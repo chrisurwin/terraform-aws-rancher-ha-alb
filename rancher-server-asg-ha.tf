@@ -186,11 +186,14 @@ resource "aws_alb" "rancher_ha" {
 }
 
 resource "aws_alb_target_group" "rancher_ha" {
-  name = "${var.name}-tg"
-  port = 8080
-  protocol = "HTTP"
-  vpc_id = "${var.vpc_id}"
-}
+ name = "${var.name}-tg"
+ port = 8080
+ protocol = "HTTP"
+ vpc_id = "${var.vpc_id}"
+ health_check {
+   path="/ping"
+ }
+
 
 resource "aws_alb_listener" "rancher_ha" {
    load_balancer_arn = "${aws_alb.rancher_ha.arn}"
