@@ -193,7 +193,7 @@ resource "aws_alb_target_group" "rancher_ha" {
  health_check {
    path="/ping"
  }
-
+}
 
 resource "aws_alb_listener" "rancher_ha" {
    load_balancer_arn = "${aws_alb.rancher_ha.arn}"
